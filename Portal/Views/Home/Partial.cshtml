@@ -1,0 +1,9 @@
+﻿@{ ViewBag.Title = "Partial"; ViewBag.Test = "Blah!"; }
+
+<div class="box" style="background:#FFEFD5">
+  <h2>First level partial view</h2>
+  @Html.Partial("SubPartial")
+  @Html.Partial("SubPartial")
+</div>
+
+@Html.PortalInScript(@<script type="text/javascript">  $(function () { alert('Hello from Partial.cstml'); }) </script>)

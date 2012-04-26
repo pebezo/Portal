@@ -1,0 +1,11 @@
+﻿@{ViewBag.Title = "Index"; ViewBag.Test = "Blah++"; }
+
+<div class="box" style="background-color:#E6E6FA">
+  
+  <h1>Main Index View</h1>
+  
+  @Html.Partial("Partial")
+
+</div>
+
+@Html.PortalIn("<div class=\"box\">From Index to Layout</div>")

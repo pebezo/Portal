@@ -1,0 +1,13 @@
+﻿@* We need 'special' CSS for this partial *@
+@Html.PortalInCss("~/content/secondary.css")
+
+
+<div class="box box-special" style="background:#ADD8E6">
+  <h2>Second level partial view</h2>
+</div>
+
+@* We register a block of JS *@
+@Html.PortalInUnique("js", @<text> $(function() { alert('Hello from second level partial'); }); </text>)
+
+@* We register a block of JavaScript using a the pre-defined Script portal *@
+@Html.PortalInScriptUnique(@<script type="text/javascript"> $(function () { alert('Hello from SubPartial.cstml'); }) </script>)

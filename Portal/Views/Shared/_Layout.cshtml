@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    @Html.PortalInJs("~/Scripts/jquery.min.js")    
+    @Html.PortalInCss("~/content/main.css")
+    @Html.PortalOutCss()
+</head>
+
+<body>    
+    <div class="box" style="background-color:whitesmoke">Layout Header</div>
+    <div class="box">
+    @RenderBody()
+    </div>
+    <div class="box" style="background-color:whitesmoke">Layout Footer</div>
+    
+    @Html.PortalOut()    
+
+    @Html.PortalOutJs()
+    <script type="text/javascript">
+      @Html.PortalOut("js")
+    </script>
+    <!-- similar, but using PortalOutScript instead -->
+    @Html.PortalOutScript()
+</body>
+</html>
