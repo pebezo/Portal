@@ -152,7 +152,7 @@ Within a layout, view, or partial view you can have an In and Out portal as long
 How to use
 ----------
 
-The only file you need is Portal.cs If you're using [NuGet](http://nuget.org/packages/Portal), the installer copies Portal.cs to /Helpers/Portal.cs in your main / current project, and modifies your web.config under /Views.
+The only file you need is Portal.cs. If you're using [NuGet to install Portal](http://nuget.org/packages/Portal), the installer copies Portal.cs to /Helpers/Portal.cs in your main / current project, and modifies your web.config under /Views.
 
 For manual installations, you can just copy Portal.cs to whatever folder you prefer and register the namespace in /Views/web.config like this:
 
