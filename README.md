@@ -9,10 +9,6 @@ With Portal, from a view or partial view, you add something into the portal usin
 
 The table below lists the methods available and a description of what they do.
 
-<style type="text/css">
-  #portal-doc td.nw { white-space:no-wrap; }
-</style>
-
 <table id="portal-doc">
     <thead>
         <tr>
@@ -23,13 +19,13 @@ The table below lists the methods available and a description of what they do.
     </thead>
     <tbody>
         <tr>
-            <td class="nw">@Html.PortalIn(text)</td>
-            <td class="nw">@Html.PortalOut()</td>
+            <td>@Html.PortalIn(text)</td>
+            <td>@Html.PortalOut()</td>
             <td>Send any text (HTML, JavaScript, CSS, etc) through the default portal.</td>
         </tr>
         <tr>
-            <td class="nw">@Html.PortalIn(key, text)</td>
-            <td class="nw">@Html.PortalOut(key)</td>
+            <td style="white-space:no-wrap;">@Html.PortalIn(key, text)</td>
+            <td style="white-space:no-wrap;">@Html.PortalOut(key)</td>
             <td>Send any text (HTML, JavaScript, CSS, etc) through a custom portal identified by a key. The out portal must use the same key.</td>
         </tr>
     </tbody>
