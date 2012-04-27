@@ -29,7 +29,7 @@ The table below lists the methods available and a description of what they do.
                 Send any text (HTML, JavaScript, CSS, etc) through the default portal.
                 You can also send a Razor template, for example:
                 <br />
-                @Html.PortalIn(@<text> $(function() { alert('Hi'); }); </text>)                
+                @Html.PortalIn(@&lt;text&gt; $(function() { alert(&#39;Hi&#39;); }); &lt;/text&gt;)                
                 <br />
                 And then somewhere in the layout view:
                 <br />
@@ -47,7 +47,7 @@ The table below lists the methods available and a description of what they do.
                 Send any text (HTML, JavaScript, CSS, etc) through a custom portal identified by a key. 
                 You can also send a Razor template, for example:
                 <br />
-                @Html.PortalIn("somekey", @<text> $(function() { alert('Hi'); }); </text>)
+                @Html.PortalIn(&quot;somekey&quot;, @&lt;text&gt; $(function() { alert(&#39;Hi&#39;); }); &lt;/text&gt;)
                 <br />
                 The out portal must use the same key.
                 <br />
