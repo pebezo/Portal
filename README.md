@@ -44,14 +44,8 @@ The table below lists the methods available and a description of what they do.
             </td>
             <td>@Html.PortalOut(key)</td>
             <td>
-                Send any text (HTML, JavaScript, CSS, etc) through a custom portal identified by a key. 
-                You can also send a Razor template, for example:
-                <br />
-                @Html.PortalIn(&quot;somekey&quot;, @&lt;text&gt; $(function() { alert(&#39;Hi&#39;); }); &lt;/text&gt;)
-                <br />
-                The out portal must use the same key.
-                <br />
-                @Html.PortalOut("somekey")
+                Same as PortalIn(text / template) except that you can define a custom portal by specifying a key. 
+                The same key (string) must be used for the In and Out methods.
             </td>
         </tr>        
         <tr>
