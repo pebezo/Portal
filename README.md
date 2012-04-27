@@ -3,7 +3,7 @@ Portal
 
 Portal MVC is a **ASP.NET MVC Razor** view helper that allows you to send blocks of HTML, JavaScript, or CSS from a view or partial view to the layout view. This overcomes the current Razor view limitation of not being able to define sections in partial views. 
 
-For example, you could register all your JavaScript blocks using Portal and output everything in your layout before the closing of the body tag. Also, from your views or partial views you list your CSS or JavaScript dependencies, calls to .css or .js files, without having to worry about ending up with duplicate file registrations.
+For example, you could register all your JavaScript blocks using Portal and output everything in your layout before the closing of the body tag. Also, from your views or partial views you could list your CSS or JavaScript dependencies, calls to .css or .js files, without having to worry about ending up with duplicate file registrations.
 
 With Portal, from a view or partial view, you add something into the portal using **@Html.PortalInXXX**, where XXX is one of the available methods. You then call the matching method **@Html.PortalOutXXX** in your layout.
 
@@ -145,6 +145,23 @@ The table below lists the methods available and a description of what they do. T
 Limitations
 -----------
 
-When Razor files are rendered the order is from sub partial views to views and then to layout. For this reason you cannot have an In portal in the layout and an Out portal in a partial view; nothing gets called in the layout view until all the sub-views are rendered.
+When Razor files are rendered the order is from sub partial views to views and then to the layout. For this reason you cannot have an In portal in the layout and an Out portal in a partial view; nothing gets called in the layout view until all the sub-views are rendered.
 
 Within a layout, view, or partial view you can have an In and Out portal as long as the In portal is placed before the Out portal.
+
+How to use
+----------
+
+The only file you need is Portal.cs If you're using [NuGet](http://nuget.org/packages/Portal), the installer copies Portal.cs to /Helpers/Portal.cs in your main / current project, and modifies your web.config under /Views.
+
+For manual installations, you can just copy Portal.cs to whatever folder you prefer and register the namespace in /Views/web.config like this:
+
+    <configuration>
+    	<system.web.webPages.razor>
+    		<pages>
+    			<namespaces>
+    				<add namespace="Portal"/>
+    			</namespaces>
+    		</pages>
+    	</system.web.webPages.razor>
+    </configuration>
