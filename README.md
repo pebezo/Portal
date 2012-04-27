@@ -19,32 +19,58 @@ The table below lists the methods available and a description of what they do.
     </thead>
     <tbody>
         <tr>
-            <td>@Html.PortalIn(text)</td>
+            <td>
+                @Html.PortalIn(text)
+                <br /> or <br />
+                @Html.PortalIn(template)
+            </td>
             <td>@Html.PortalOut()</td>
-            <td>Send any text (HTML, JavaScript, CSS, etc) through the default portal.</td>
-        </tr>
-        <tr>
-            <td>@Html.PortalIn(key, text)</td>
-            <td>@Html.PortalOut(key)</td>
-            <td>Send any text (HTML, JavaScript, CSS, etc) through a custom portal identified by a key. The out portal must use the same key.</td>
-        </tr>
-        <tr>
-            <td>@Html.PortalIn(key, template)</td>
-            <td>@Html.PortalOut(key)</td>
-            <td>Send an HTML template through a custom portal identified by a key. For example: 
+            <td>
+                Send any text (HTML, JavaScript, CSS, etc) through the default portal.
+                You can also send a Razor template, for example:
                 <br />
-                @Html.PortalIn("somekey", @<text> $(function() { alert('Hi'); }); </text>)
+                @Html.PortalIn(@<text> $(function() { alert('Hi'); }); </text>)                
                 <br />
-                The out portal must use the same key. 
+                And then somewhere in the layout view:
+                <br />
+                @Html.PortalOut()
             </td>
         </tr>
         <tr>
-            <td>@Html.PortalInUnique(key, text)</td>
+            <td>
+                @Html.PortalIn(key, text)
+                <br /> or <br />
+                @Html.PortalIn(key, template)
+            </td>
             <td>@Html.PortalOut(key)</td>
-            <td>Same as PortalIn(key, text) except that if you try to add the same text twice only the first addition is actually added.</td>
+            <td>
+                Send any text (HTML, JavaScript, CSS, etc) through a custom portal identified by a key. 
+                You can also send a Razor template, for example:
+                <br />
+                @Html.PortalIn("somekey", @<text> $(function() { alert('Hi'); }); </text>)
+                <br />
+                The out portal must use the same key.
+                <br />
+                @Html.PortalOut("somekey")
+            </td>
+        </tr>        
+        <tr>
+            <td>
+                @Html.PortalInUnique(key, text)
+                <br /> or <br />
+                @Html.PortalInUnique(key, template)
+            </td>
+            <td>
+                @Html.PortalOut(key)
+            </td>
+            <td>Same as PortalIn(key, text / template) except that if you try to add the same content twice only the first addition is actually added.</td>
         </tr>
         <tr>
-            <td>@Html.PortalInCss(path)</td>
+            <td>
+                @Html.PortalInCss(path)
+                <br /> or <br />
+                @Html.PortalInCssAbsolute(path)
+            </td>
             <td>@Html.PortalOutCss()</td>
             <td>Registers a path to a CSS file, for example:
                 <br />
@@ -56,10 +82,20 @@ The table below lists the methods available and a description of what they do.
                 <br />
                 Duplicate paths are removed. In the layout file you should call PortalInCss for all the CSS files that may be added. 
                 This way if the same CSS file is registered from a view then that CSS file would only be linked once in the layout.
+                <br />
+                If you would rather Portal not modify the given path or you would like to specify the full path, you can use:
+                <br />
+                @Html.PortalInCssAbsolute("http://example.com/css/my.css")
+                <br /> or <br />
+                @Html.PortalInCssAbsolute("//example.com/css/my.css")
              </td>
         </tr>
         <tr>
-            <td>@Html.PortalInJs(path)</td>
+            <td>
+                @Html.PortalInJs(path)
+                <br /> or <br />
+                @Html.PortalInJsAbsolute(path)
+            </td>
             <td>@Html.PortalOutJs()</td>
             <td>Registers a path to a JS file, for example:
                 <br />
@@ -69,7 +105,9 @@ The table below lists the methods available and a description of what they do.
                 <br />
                 &lt;script src="/scripts/my.js" type="text/javascript"&gt;&lt;/script&gt;
                 <br />
-                Duplicate paths are removed.
+                Duplicate paths are removed. If you don't want Portal to change the path you can use:
+                <br />
+                @Html.PortalInJsAbsolute("http://example.com/scripts/my.js")
              </td>
         </tr>
         <tr>
