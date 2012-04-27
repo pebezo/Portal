@@ -64,40 +64,64 @@ namespace Portal
 
     const string PORTAL_KEY = "__PORTAL_KEY";
     const string PORTAL_CSS_KEY = "__PORTAL_CSS_KEY";
+    const string PORTAL_STYLE_KEY = "__PORTAL_STYLE_KEY";
     const string PORTAL_JS_KEY = "__PORTAL_JS_KEY";
     const string PORTAL_SCRIPT_KEY = "__PORTAL_SCRIPT_KEY";
 
     private static List<string> Get(HtmlHelper helper, string key)
-    {      
+    {
       var dic = helper.ViewContext.HttpContext.Items[key] as Dictionary<string, List<string>>;
       if (dic == null)
       {
-        dic = new Dictionary<string, List<string>>();      
+        dic = new Dictionary<string, List<string>>();
         helper.ViewContext.HttpContext.Items[key] = dic;
       }
       List<string> list;
       if (!dic.TryGetValue(key, out list))
       {
         list = new List<string>();
-        dic[key] = list;        
+        dic[key] = list;
       }
       return list;
     }
 
     private static void Add(HtmlHelper helper, string key, string text)
     {
-      Get(helper, key).Add(text);
+      if (text != null)
+      {
+        Get(helper, key).Add(text);
+      }
+    }
+
+    private static void Add(HtmlHelper helper, string key, MvcHtmlString text)
+    {
+      if (text != null)
+      {
+        Get(helper, key).Add(text.ToString());
+      }
     }
 
     private static void Add(HtmlHelper helper, string text)
     {
-      Add(helper, PORTAL_KEY, text);
+      if (text != null)
+      {
+        Add(helper, PORTAL_KEY, text);
+      }
     }
 
     private static void AddUnique(HtmlHelper helper, string key, string text)
     {
+      if (text == null) return;
       var list = Get(helper, key);
       if (!list.Contains(text)) list.Add(text);
+    }
+
+    private static void AddUnique(HtmlHelper helper, string key, MvcHtmlString text)
+    {
+      if (text != null)
+      {
+        AddUnique(helper, key, text.ToString());
+      }
     }
 
     private static void AddUnique(HtmlHelper helper, string text)
@@ -105,10 +129,18 @@ namespace Portal
       AddUnique(helper, PORTAL_KEY, text);
     }
 
+    private static void AddUnique(HtmlHelper helper, MvcHtmlString text)
+    {
+      AddUnique(helper, PORTAL_KEY, text);
+    }
+
     private static void AddUniqueTop(HtmlHelper helper, string key, string text)
     {
-      var list = Get(helper, key);
-      if (!list.Contains(text)) list.Insert(0, text);
+      if (text != null)
+      {
+        var list = Get(helper, key);
+        if (!list.Contains(text)) list.Insert(0, text);
+      }
     }
 
     #endregion
@@ -170,7 +202,7 @@ namespace Portal
       Add(helper, template(null).ToString());
       return null;
     }
-    
+
     #endregion
 
     #region In Unique
@@ -188,6 +220,15 @@ namespace Portal
     /// Add a piece of text or HTML to the default portal key while making sure there are no duplicate entries.
     /// </summary>
     public static MvcHtmlString PortalInUnique(this HtmlHelper helper, string text)
+    {
+      AddUnique(helper, text);
+      return null;
+    }
+
+    /// <summary>
+    /// Add a piece of text or HTML to the default portal key while making sure there are no duplicate entries.
+    /// </summary>
+    public static MvcHtmlString PortalInUnique(this HtmlHelper helper, MvcHtmlString text)
     {
       AddUnique(helper, text);
       return null;
@@ -230,6 +271,36 @@ namespace Portal
     public static MvcHtmlString PortalInCssAbsolute(this HtmlHelper helper, string path)
     {
       AddUniqueTop(helper, PORTAL_CSS_KEY, path);
+      return null;
+    }
+
+    /// <summary>
+    /// Register a block of style sheet, including the style block, using a template 
+    /// for example: @&lt;style type="text/css"&gt; ... code ... &lt;/style&gt;
+    /// </summary>
+    public static MvcHtmlString PortalInStyle(this HtmlHelper helper, Func<dynamic, HelperResult> template)
+    {
+      Add(helper, PORTAL_STYLE_KEY, template(null).ToString());
+      return null;
+    }
+
+    /// <summary>
+    /// Register a block of style sheet, including the style block, using a template 
+    /// for example: @&lt;style type="text/css"&gt; ... code ... &lt;/style&gt;
+    /// </summary>
+    public static MvcHtmlString PortalInStyle(this HtmlHelper helper, string text)
+    {
+      Add(helper, PORTAL_STYLE_KEY, text);
+      return null;
+    }
+
+    /// <summary>
+    /// Register a block of style sheet, including the style block, using a template 
+    /// for example: @&lt;style type="text/css"&gt; ... code ... &lt;/style&gt;
+    /// </summary>
+    public static MvcHtmlString PortalInStyle(this HtmlHelper helper, MvcHtmlString text)
+    {
+      Add(helper, PORTAL_STYLE_KEY, text);
       return null;
     }
 
@@ -278,11 +349,43 @@ namespace Portal
     /// <summary>
     /// Register a block of JavaScript code, including the script block, 
     /// for example: @&lt;script type="text/javascript"&gt; ... code ... &lt;/script&gt;
+    /// </summary>
+    public static MvcHtmlString PortalInScript(this HtmlHelper helper, MvcHtmlString text)
+    {
+      Add(helper, PORTAL_SCRIPT_KEY, text);
+      return null;
+    }
+
+    /// <summary>
+    /// Register a block of JavaScript code, including the script block, 
+    /// for example: @&lt;script type="text/javascript"&gt; ... code ... &lt;/script&gt;
     /// while making sure there are no duplicate entries.
     /// </summary>
     public static MvcHtmlString PortalInScriptUnique(this HtmlHelper helper, Func<dynamic, HelperResult> template)
     {
       AddUnique(helper, PORTAL_SCRIPT_KEY, template(null).ToString());
+      return null;
+    }
+
+    /// <summary>
+    /// Register a block of JavaScript code, including the script block, 
+    /// for example: @&lt;script type="text/javascript"&gt; ... code ... &lt;/script&gt;
+    /// while making sure there are no duplicate entries.
+    /// </summary>
+    public static MvcHtmlString PortalInScriptUnique(this HtmlHelper helper, string text)
+    {
+      AddUnique(helper, PORTAL_SCRIPT_KEY, text);
+      return null;
+    }
+
+    /// <summary>
+    /// Register a block of JavaScript code, including the script block, 
+    /// for example: @&lt;script type="text/javascript"&gt; ... code ... &lt;/script&gt;
+    /// while making sure there are no duplicate entries.
+    /// </summary>
+    public static MvcHtmlString PortalInScriptUnique(this HtmlHelper helper, MvcHtmlString text)
+    {
+      AddUnique(helper, PORTAL_SCRIPT_KEY, text);
       return null;
     }
 
@@ -323,7 +426,7 @@ namespace Portal
       {
         var list = Get(helper, PORTAL_CSS_KEY);
         foreach (var item in list)
-        {          
+        {
           writer.Write("<link href=\"");
           writer.Write(item);
           writer.Write("\" rel=\"stylesheet\" type=\"text/css\"/>");
@@ -364,7 +467,23 @@ namespace Portal
         }
       }
       return null;
-    }        
+    }
+
+    /// <summary>
+    /// Output style sheet blocks that were added using PortalInStyle
+    /// </summary>
+    public static MvcHtmlString PortalOutStyle(this HtmlHelper helper)
+    {
+      using (var writer = new HtmlTextWriter(helper.ViewContext.Writer))
+      {
+        var list = Get(helper, PORTAL_STYLE_KEY);
+        foreach (var item in list)
+        {
+          writer.Write(item);
+        }
+      }
+      return null;
+    }
 
     #endregion
   }
