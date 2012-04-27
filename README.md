@@ -142,8 +142,8 @@ The table below lists the methods available and a description of what they do. T
     </tbody>
 </table>
 
-Limitation
-----------
+Limitations
+-----------
 
 When Razor files are rendered the order is from sub partial views to views and then to layout. For this reason you cannot have an In portal in the layout and an Out portal in a partial view; nothing gets called in the layout view until all the sub-views are rendered.
 
