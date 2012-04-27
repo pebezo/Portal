@@ -1,13 +1,13 @@
 Portal
 ======
 
-Portal MVC is a **ASP.NET MVC Razor** view helper that allows you to send blocks of HTML or JavaScript from a view or partial view to the layout view. 
+Portal MVC is a **ASP.NET MVC Razor** view helper that allows you to send blocks of HTML, JavaScript, or CSS from a view or partial view to the layout view. This overcomes the current Razor view limitation of not being able to define sections in partial views. 
 
-This is helpful when you want to include various bits of JavaScript, CSS, or HTML from views or partial views into parent views or the layout view.
+For example, you could register all your JavaScript blocks using Portal and output everything in your layout before the closing of the body tag. Also, from your views or partial views you list your CSS or JavaScript dependencies, calls to .css or .js files, without having to worry about ending up with duplicate file registrations.
 
-With Portal, from a view or partial view, you add something into the portal using **@Html.PortalInXXX**, where XXX is one of the available methods. You then call the matching method **@Html.PortalOutXXX**.
+With Portal, from a view or partial view, you add something into the portal using **@Html.PortalInXXX**, where XXX is one of the available methods. You then call the matching method **@Html.PortalOutXXX** in your layout.
 
-The table below lists the methods available and a description of what they do.
+The table below lists the methods available and a description of what they do. The code in the In column should go into the view or partial view, while the code in the Out column should go in the layout view.
 
 <table id="portal-doc">
     <thead>
@@ -141,3 +141,10 @@ The table below lists the methods available and a description of what they do.
         </tr>
     </tbody>
 </table>
+
+Limitation
+----------
+
+When Razor files are rendered the order is from sub partial views to views and then to layout. For this reason you cannot have an In portal in the layout and an Out portal in a partial view; nothing gets called in the layout view until all the sub-views are rendered.
+
+Within a layout, view, or partial view you can have an In and Out portal as long as the In portal is placed before the Out portal.
