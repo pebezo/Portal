@@ -1,7 +1,7 @@
 Portal
 ======
 
-Portal MVC is a ASP.NET MVC Razor view helper that allows you to send blocks of HTML or JavaScript from a view or partial view to the layout view. 
+Portal MVC is a **ASP.NET MVC Razor** view helper that allows you to send blocks of HTML or JavaScript from a view or partial view to the layout view. 
 
 This is helpful when you want to include various bits of JavaScript, CSS, or HTML from views or partial views into parent views or the layout view.
 
@@ -33,10 +33,22 @@ The table below lists the methods available and a description of what they do.
             <td>@Html.PortalOut(key)</td>
             <td>Send an HTML template through a custom portal identified by a key. For example: 
                 <br />
-                <code>@Html.PortalIn("somekey", @<text> $(function() { alert('Hello from partial view!'); }); </text>) </code>
+                @Html.PortalIn("somekey", @<text> $(function() { alert('Hello from partial view!'); }); </text>)
                 <br />
                 The out portal must use the same key. 
             </td>
+        </tr>
+        <tr>
+            <td>@Html.PortalInUnique(key, text)</td>
+            <td>@Html.PortalOut(key)</td>
+            <td>Same as PortalIn(key, text) except that if you try to add the same text twice only the first addition is actually added.</td>
+        </tr>
+        <tr>
+            <td>@Html.PortalInCss(path)</td>
+            <td>@Html.PortalOutCss()</td>
+            <td>Registers a path to a CSS file, for example @Html.PortalInCss("~/content/some.css"), and then outputs a link tag. The output in our example would be: <br />
+                &lt;link href="/content/some.css" rel="stylesheet" type="text/css" /&gt;
+             </td>
         </tr>
     </tbody>
 </table>
