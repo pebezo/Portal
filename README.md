@@ -33,7 +33,7 @@ The table below lists the methods available and a description of what they do.
             <td>@Html.PortalOut(key)</td>
             <td>Send an HTML template through a custom portal identified by a key. For example: 
                 <br />
-                @Html.PortalIn("somekey", @<text> $(function() { alert('Hello from partial view!'); }); </text>)
+                @Html.PortalIn("somekey", @<text> $(function() { alert('Hi'); }); </text>)
                 <br />
                 The out portal must use the same key. 
             </td>
@@ -46,8 +46,27 @@ The table below lists the methods available and a description of what they do.
         <tr>
             <td>@Html.PortalInCss(path)</td>
             <td>@Html.PortalOutCss()</td>
-            <td>Registers a path to a CSS file, for example @Html.PortalInCss("~/content/some.css"), and then outputs a link tag. The output in our example would be: <br />
+            <td>Registers a path to a CSS file, for example:
+                <br />
+                @Html.PortalInCss("~/content/some.css")
+                <br />
+                and then outputs a link tag. The output in our example would be: 
+                <br />
                 &lt;link href="/content/some.css" rel="stylesheet" type="text/css" /&gt;
+				Duplicate paths are removed. In the layout file you should call PortalInCss for all the CSS files that may be added
+             </td>
+        </tr>
+		<tr>
+            <td>@Html.PortalInJs(path)</td>
+            <td>@Html.PortalOutJs()</td>
+            <td>Registers a path to a JS file, for example:
+                <br />
+                @Html.PortalInJs("~/scripts/my.js")
+                <br />
+                and then outputs a script tag. The output in our example would be: 
+                <br />
+                &lt;script src="/scripts/my.js" type="text/javascript" &gt;&lt;/script&gt;
+				Duplicate paths are removed.
              </td>
         </tr>
     </tbody>
