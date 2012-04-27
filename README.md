@@ -28,10 +28,12 @@ The table below lists the methods available and a description of what they do.
             <td>@Html.PortalOut(key)</td>
             <td>Send any text (HTML, JavaScript, CSS, etc) through a custom portal identified by a key. The out portal must use the same key.</td>
         </tr>
-		<tr>
+        <tr>
             <td>@Html.PortalIn(key, template)</td>
             <td>@Html.PortalOut(key)</td>
-            <td>Send an HTML template through a custom portal identified by a key. For example: @Html.PortalIn("somekey", @<text> $(function() { alert('Hello from partial view!'); }); </text>) The out portal must use the same key. </td>
+            <td>Send an HTML template through a custom portal identified by a key. For example: 
+    @Html.PortalIn("somekey", @<text> $(function() { alert('Hello from partial view!'); }); </text>) 
+The out portal must use the same key. </td>
         </tr>
     </tbody>
 </table>
