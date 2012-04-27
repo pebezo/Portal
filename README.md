@@ -26,8 +26,11 @@ The table below lists the methods available and a description of what they do.
             </td>
             <td>@Html.PortalOut()</td>
             <td>
-                Send any text (HTML, JavaScript, CSS, etc) through the default portal.
-                You can also send a Razor template, for example:
+                Send any text (HTML, JavaScript, CSS, etc) through the default portal:
+                <br />
+                @Html.PortalIn("Hello World")
+                <br />
+                You can also send a Razor template:
                 <br />
                 @Html.PortalIn(@&lt;text&gt; $(function() { alert(&#39;Hi&#39;); }); &lt;/text&gt;)                
                 <br />
@@ -70,12 +73,12 @@ The table below lists the methods available and a description of what they do.
                 <br />
                 @Html.PortalInCss("~/content/some.css")
                 <br />
-                and then outputs a link tag. The output in our example would be: 
+                The output in our example would be: 
                 <br />
                 &lt;link href="/content/some.css" rel="stylesheet" type="text/css" /&gt;
                 <br />
                 Duplicate paths are removed. In the layout file you should call PortalInCss for all the CSS files that may be added. 
-                This way if the same CSS file is registered from a view then that CSS file would only be linked once in the layout.
+                This way if the same CSS file is registered from a different view then that CSS file would only be linked once in the layout.
                 <br />
                 If you would rather Portal not modify the given path or you would like to specify the full path, you can use:
                 <br />
@@ -95,7 +98,7 @@ The table below lists the methods available and a description of what they do.
                 <br />
                 @Html.PortalInJs("~/scripts/my.js")
                 <br />
-                and then outputs a script tag. The output in our example would be: 
+                The output in our example would be: 
                 <br />
                 &lt;script src="/scripts/my.js" type="text/javascript"&gt;&lt;/script&gt;
                 <br />
@@ -111,9 +114,11 @@ The table below lists the methods available and a description of what they do.
                 @Html.PortalInStyle(template)                
             </td>
             <td>@Html.PortalOutStyle()</td>
-            <td>Registers a block of CSS in a view or partial view, for example:
+            <td>Registers a block of CSS in a view or partial view:
                 <br />
                 @Html.PortalInStyle(@&lt;style type=&quot;text/css&quot;&gt; #some-id { font-weight: bold; }&lt;/style&gt;)
+                <br />
+                The output is rendered without processing.
              </td>
         </tr>
         <tr>
@@ -131,7 +136,7 @@ The table below lists the methods available and a description of what they do.
                 <br />
                 @Html.PortalInScript(@&lt;script type=&quot;text/javascript&quot;&gt; $(function () { alert(&#39;Hi!&#39;); }) &lt;/script&gt;)
                 <br />
-                The output is the same as the input. If PortalInScriptUnique is used, then duplicate blocks are not added.
+                The output is rendered without processing. If PortalInScriptUnique is used, then duplicate blocks are not added.
              </td>
         </tr>
     </tbody>
