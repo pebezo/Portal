@@ -1,7 +1,7 @@
 Portal
 ======
 
-Portal MVC is a **ASP.NET MVC Razor** view helper that allows you to send blocks of HTML, JavaScript, or CSS from a view or partial view to the layout view. This overcomes the current Razor view limitation of not being able to define sections in partial views. 
+Portal is a **ASP.NET MVC Razor** view helper that allows you to send blocks of HTML, JavaScript, or CSS from a view or partial view to the layout view. This overcomes the current Razor view limitation of not being able to define sections in partial views. 
 
 For example, you could register all your JavaScript blocks using Portal and output everything in your layout before the closing of the body tag. Also, from your views or partial views you could list your CSS or JavaScript dependencies, calls to .css or .js files, without having to worry about ending up with duplicate file registrations.
 

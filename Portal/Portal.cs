@@ -11,6 +11,29 @@ namespace Portal
   /// Allows views or partial views to send data to the layout view. You can send information through several
   /// portals identified through a common key or through the default portal.
   /// 
+  /// https://github.com/pebezo/Portal
+  /// 
+  /// MIT License 
+  ///  
+  /// Permission is hereby granted, free of charge, to any person obtaining
+  /// a copy of this software and associated documentation files (the
+  /// "Software"), to deal in the Software without restriction, including
+  /// without limitation the rights to use, copy, modify, merge, publish,
+  /// distribute, sublicense, and/or sell copies of the Software, and to
+  /// permit persons to whom the Software is furnished to do so, subject to
+  /// the following conditions:
+  /// 
+  /// The above copyright notice and this permission notice shall be
+  /// included in all copies or substantial portions of the Software.
+  /// 
+  /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  /// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  /// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+  /// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+  /// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+  /// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+  /// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  /// 
   /// Example 1: Send HTML from Index to Layout through the default portal
   /// 
   /// Index.cshtml ->   @Html.PortalIn("<div>From Index to Layout</div>")  
@@ -49,6 +72,10 @@ namespace Portal
   /// View.cshtml ->   @Html.PortalInScriptUnique(@<script type="text/javascript"> $(function () { alert('Hello!'); }) </script>)
   /// Layout.cshtml -> @Html.PortalOutScript()
   /// 
+  /// Example 8: Register a block of CSS to be included in the layout.
+  /// 
+  /// View.cshtml ->   @Html.PortalInStyle(@<style type="text/css"> #some-id { font-weight: bold; }</style>)
+  /// Layout.cshtml -> @Html.PortalOutStyle()
   /// 
   /// Limitations:
   /// When Razor files are rendered the order is from sub partial views to views and then to layout. For this
